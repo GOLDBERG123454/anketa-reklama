@@ -188,17 +188,17 @@
           <div class="card half">
             <h3 class="card-title">Бренд и оформление</h3>
             <p class="card-sub">Что уже есть для сайта и рекламы.</p>
-            <div class="field"><label>Есть ли логотип</label><select name="logo"><option value="Да">Да</option><option value="Нет">Нет</option><option value="В разработке">В разработке</option></select></div>
-            <div class="field"><label>Есть ли фирменные цвета / стиль</label><select name="brand_style"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
-            <div class="field"><label>Есть ли готовые фото и видео для продвижения</label><select name="media_ready"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
-            <div class="field"><label>Есть ли прайс</label><select name="price_list"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Нужно оформить">Нужно оформить</option></select></div>
-            <div class="field"><label>Есть ли отзывы клиентов</label><select name="reviews"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Немного">Немного</option></select></div>
+            <div class="field"><label>Есть ли логотип</label><select name="logo"><option value="" selected></option><option value="Да">Да</option><option value="Нет">Нет</option><option value="В разработке">В разработке</option></select></div>
+            <div class="field"><label>Есть ли фирменные цвета / стиль</label><select name="brand_style"><option value="" selected></option><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
+            <div class="field"><label>Есть ли готовые фото и видео для продвижения</label><select name="media_ready"><option value="" selected></option><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
+            <div class="field"><label>Есть ли прайс</label><select name="price_list"><option value="" selected></option><option value="Да">Да</option><option value="Нет">Нет</option><option value="Нужно оформить">Нужно оформить</option></select></div>
+            <div class="field"><label>Есть ли отзывы клиентов</label><select name="reviews"><option value="" selected></option><option value="Да">Да</option><option value="Нет">Нет</option><option value="Немного">Немного</option></select></div>
           </div>
 
           <div class="card half">
             <h3 class="card-title">Организационная информация</h3>
             <p class="card-sub">Нужна для корректной упаковки проекта и рекламы.</p>
-            <div class="field"><label>Как оформлена деятельность</label><select name="legal_type"><option>Самозанятость</option><option>ИП</option><option>ООО</option><option>Другое</option></select></div>
+            <div class="field"><label>Как оформлена деятельность</label><select name="legal_type"><option value="" selected></option><option>Самозанятость</option><option>ИП</option><option>ООО</option><option>Другое</option></select></div>
             <div class="field"><label>ИНН</label><input name="inn" type="text" /></div>
             <div class="field"><label>Кто принимает оплату от клиентов *</label><input name="payment_receiver" type="text" /></div>
             <div class="field"><label>Есть ли сертификаты, дипломы, документы на оборудование</label><textarea name="docs_info"></textarea></div>
@@ -228,7 +228,7 @@
             <div class="field"><label>Почему клиенты выбирают именно вас *</label><textarea name="why_choose_you"></textarea></div>
             <div class="field"><label>Какие районы / станции метро / локации нужно продвигать *</label><textarea name="promo_geo"></textarea></div>
             <div class="field"><label>Какие районы лучше не запускать</label><textarea name="exclude_geo"></textarea></div>
-            <div class="field"><label>Работаете только в кабинете или есть выезд</label><select name="format_work"><option>Только в кабинете</option><option>Есть выезд</option><option>И так и так</option></select></div>
+            <div class="field"><label>Работаете только в кабинете или есть выезд</label><select name="format_work"><option value="" selected></option><option>Только в кабинете</option><option>Есть выезд</option><option>И так и так</option></select></div>
           </div>
 
           <div class="card">
@@ -273,7 +273,7 @@
             </div>
             <div class="grid">
               <div class="card half"><div class="field"><label>Какие площадки сейчас дают заявки *</label><textarea name="working_channels"></textarea></div><div class="field"><label>Что не даёт результата</label><textarea name="bad_channels"></textarea></div><div class="field"><label>Есть ли действующие кабинеты и доступы</label><textarea name="accesses"></textarea></div></div>
-              <div class="card half"><div class="field"><label>Сколько в среднем тратите на рекламу в месяц</label><input name="budget_now" type="text"></div><div class="field"><label>Какой бюджет готовы выделять дальше *</label><input name="budget_next" type="text"></div><div class="field"><label>Какой бюджет комфортен на тестовый запуск *</label><input name="budget_test" type="text"></div><div class="field"><label>Готовы ли увеличивать бюджет, если реклама окупается</label><select name="budget_scale"><option>Да</option><option>Нет</option><option>Готовы обсуждать</option></select></div></div>
+              <div class="card half"><div class="field"><label>Сколько в среднем тратите на рекламу в месяц</label><input name="budget_now" type="text"></div><div class="field"><label>Какой бюджет готовы выделять дальше *</label><input name="budget_next" type="text"></div><div class="field"><label>Какой бюджет комфортен на тестовый запуск *</label><input name="budget_test" type="text"></div><div class="field"><label>Готовы ли увеличивать бюджет, если реклама окупается</label><select name="budget_scale"><option value="" selected></option><option>Да</option><option>Нет</option><option>Готовы обсуждать</option></select></div></div>
             </div>
           </div>
         </div>
@@ -284,8 +284,8 @@
           <div class="card half">
             <h3 class="card-title">Сайт</h3>
             <p class="card-sub">Что нужно по сайту и как он должен работать.</p>
-            <div class="field"><label>Есть ли сайт сейчас</label><select name="site_exist"><option>Да</option><option>Нет</option></select></div>
-            <div class="field"><label>Нужен новый сайт с нуля или доработка</label><select name="site_task"><option>Новый сайт</option><option>Доработка</option><option>Пока не уверены</option></select></div>
+            <div class="field"><label>Есть ли сайт сейчас</label><select name="site_exist"><option value="" selected></option><option>Да</option><option>Нет</option></select></div>
+            <div class="field"><label>Нужен новый сайт с нуля или доработка</label><select name="site_task"><option value="" selected></option><option>Новый сайт</option><option>Доработка</option><option>Пока не уверены</option></select></div>
             <div class="field"><label>Какие разделы обязательно должны быть на сайте *</label><textarea name="site_sections"></textarea></div>
             <label>Что обязательно нужно разместить на сайте</label>
             <div class="checks">
@@ -306,7 +306,7 @@
             <p class="card-sub">Чтобы понять текущую воронку и загрузку.</p>
             <div class="field"><label>Сколько сейчас аккаунтов Авито</label><input name="avito_accounts" type="text"></div>
             <div class="field"><label>Какие услуги размещаются на каждом аккаунте</label><textarea name="avito_services"></textarea></div>
-            <div class="field"><label>Нужно ли переупаковать аккаунты полностью</label><select name="avito_repack"><option>Да</option><option>Нет</option><option>Частично</option></select></div>
+            <div class="field"><label>Нужно ли переупаковать аккаунты полностью</label><select name="avito_repack"><option value="" selected></option><option>Да</option><option>Нет</option><option>Частично</option></select></div>
             <div class="field"><label>Кто отвечает на заявки *</label><input name="lead_manager" type="text"></div>
             <div class="field"><label>Как быстро обычно отвечаете клиентам *</label><input name="lead_speed" type="text"></div>
             <div class="field"><label>Через какие каналы чаще всего приходят обращения *</label><textarea name="lead_channels"></textarea></div>
