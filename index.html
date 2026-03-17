@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Анкета для старта продвижения</title>
+  <style>
+    :root {
+      --bg: #f7f4ff;
+      --panel: rgba(255,255,255,0.82);
+      --card: #ffffff;
+      --text: #231942;
+      --muted: #6f6790;
+      --line: #e8e1fb;
+      --accent: #7c5cff;
+      --accent-2: #b49cff;
+      --ok: #1f9d65;
+      --shadow: 0 20px 60px rgba(73, 40, 145, 0.12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--text); background:
+      radial-gradient(circle at top left, #efe8ff 0%, transparent 35%),
+      radial-gradient(circle at top right, #f9ebff 0%, transparent 30%),
+      linear-gradient(180deg, #faf7ff 0%, #f6f3ff 100%);
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 18px 80px; }
+    .hero {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #f1ebff; color: var(--accent); font-weight: 600; font-size: 13px; }
+    h1 { margin: 14px 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; }
+    .sub { color: var(--muted); max-width: 760px; line-height: 1.6; font-size: 16px; }
+    .topbar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .stat { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; }
+    .stat b { display:block; font-size: 18px; margin-bottom: 4px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin: 18px 0 22px;
+    }
+    .step-btn {
+      width: 100%; border: 1px solid var(--line); background: white; border-radius: 18px; padding: 16px; text-align: left; cursor: pointer;
+      transition: .22s ease; box-shadow: 0 8px 24px rgba(76, 47, 149, 0.06);
+    }
+    .step-btn:hover { transform: translateY(-1px); }
+    .step-btn.active { border-color: var(--accent); box-shadow: 0 10px 28px rgba(124, 92, 255, 0.15); background: linear-gradient(180deg,#fff 0%,#faf7ff 100%); }
+    .step-btn small { display:block; color: var(--muted); margin-bottom: 6px; }
+    .step-btn strong { font-size: 16px; }
+
+    .sheet {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .section { display: none; animation: fade .24s ease; }
+    .section.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity:1; transform:none; } }
+
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 14px; }
+    .card {
+      grid-column: span 12;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 30px rgba(74, 43, 145, 0.05);
+    }
+    .card.half { grid-column: span 6; }
+    .card.third { grid-column: span 4; }
+    .card-title { margin: 0 0 4px; font-size: 18px; }
+    .card-sub { margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    label { display: block; font-weight: 600; font-size: 14px; margin: 0 0 8px; }
+    .field { margin-bottom: 14px; }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="number"], textarea, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 14px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: .2s ease;
+    }
+    textarea { min-height: 108px; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(124,92,255,.11); }
+    .muted { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+    .checks { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 12px; }
+    .check {
+      display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 16px; background: #fff;
+    }
+    .check input { margin-top: 3px; accent-color: var(--accent); }
+    .check span { font-weight: 500; }
+
+    .service-card { border: 1px dashed #d8cdf8; border-radius: 20px; padding: 16px; background: linear-gradient(180deg,#fff 0%,#fcfbff 100%); margin-bottom: 14px; }
+    .service-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom: 12px; }
+    .service-head strong { font-size: 16px; }
+
+    .nav {
+      display: flex; justify-content: space-between; gap: 12px; margin-top: 18px;
+    }
+    .btn {
+      border: 0; background: linear-gradient(135deg,var(--accent),var(--accent-2)); color: #fff; border-radius: 16px; padding: 14px 18px; font: inherit; font-weight: 700; cursor: pointer; box-shadow: 0 10px 26px rgba(124,92,255,.28);
+    }
+    .btn.secondary { background: white; color: var(--text); border: 1px solid var(--line); box-shadow: none; }
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+    .submitbar {
+      margin-top: 22px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; background:#fff; border:1px solid var(--line); border-radius:22px; padding:16px;
+    }
+    .submitbar .left b { display:block; margin-bottom:4px; }
+    .status { color: var(--muted); font-size: 14px; }
+    .status.ok { color: var(--ok); font-weight: 600; }
+
+    .hidden { display:none !important; }
+
+    @media (max-width: 900px) {
+      .topbar, .steps { grid-template-columns: 1fr; }
+      .card.half, .card.third { grid-column: span 12; }
+      .checks { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="pill">Онлайн-анкета проекта</div>
+      <h1>Анкета для старта продвижения</h1>
+      <p class="sub">Эта форма поможет аккуратно собрать информацию для сайта, Яндекс Директ, Авито и общей стратегии продвижения. Обязательны только ключевые поля. Остальное можно заполнить по мере готовности.</p>
+      <div class="topbar">
+        <div class="stat"><b>3 этапа</b><span>без перегруза и длинной простыни</span></div>
+        <div class="stat"><b>Онлайн</b><span>можно открыть с телефона или компьютера</span></div>
+        <div class="stat"><b>Отправка</b><span>ответы можно отправить одной кнопкой</span></div>
+        <div class="stat"><b>Гибко</b><span>необязательные поля можно пропустить</span></div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <button type="button" class="step-btn active" data-step="1"><small>Этап 1</small><strong>База проекта</strong></button>
+      <button type="button" class="step-btn" data-step="2"><small>Этап 2</small><strong>Услуги и реклама</strong></button>
+      <button type="button" class="step-btn" data-step="3"><small>Этап 3</small><strong>Сайт, Авито и ожидания</strong></button>
+    </div>
+
+    <form id="briefForm" class="sheet">
+      <input type="hidden" name="form_title" value="Анкета для старта продвижения" />
+
+      <section class="section active" data-section="1">
+        <div class="grid">
+          <div class="card half">
+            <h3 class="card-title">Основная информация</h3>
+            <p class="card-sub">Начнём с короткого знакомства с проектом.</p>
+            <div class="field"><label>Название студии / кабинета / бренда *</label><input name="brand_name" type="text" /></div>
+            <div class="field"><label>ФИО контактного лица *</label><input name="contact_name" type="text" /></div>
+            <div class="field"><label>Основной телефон *</label><input name="phone" type="tel" /></div>
+            <div class="field"><label>WhatsApp</label><input name="whatsapp" type="text" /></div>
+            <div class="field"><label>Telegram</label><input name="telegram" type="text" /></div>
+            <div class="field"><label>Email</label><input name="email" type="email" /></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Адрес и работа</h3>
+            <p class="card-sub">Чтобы понимать географию и удобство для клиента.</p>
+            <div class="field"><label>Адрес работы (если адресов несколько — указать все) *</label><textarea name="addresses"></textarea></div>
+            <div class="field"><label>График работы *</label><input name="work_schedule" type="text" /></div>
+            <div class="field"><label>Есть ли парковка, ориентиры, удобный вход, близость к метро</label><textarea name="location_notes"></textarea></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Бренд и оформление</h3>
+            <p class="card-sub">Что уже есть для сайта и рекламы.</p>
+            <div class="field"><label>Есть ли логотип</label><select name="logo"><option value="Да">Да</option><option value="Нет">Нет</option><option value="В разработке">В разработке</option></select></div>
+            <div class="field"><label>Есть ли фирменные цвета / стиль</label><select name="brand_style"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
+            <div class="field"><label>Есть ли готовые фото и видео для продвижения</label><select name="media_ready"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Частично">Частично</option></select></div>
+            <div class="field"><label>Есть ли прайс</label><select name="price_list"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Нужно оформить">Нужно оформить</option></select></div>
+            <div class="field"><label>Есть ли отзывы клиентов</label><select name="reviews"><option value="Да">Да</option><option value="Нет">Нет</option><option value="Немного">Немного</option></select></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Организационная информация</h3>
+            <p class="card-sub">Нужна для корректной упаковки проекта и рекламы.</p>
+            <div class="field"><label>Как оформлена деятельность</label><select name="legal_type"><option>Самозанятость</option><option>ИП</option><option>ООО</option><option>Другое</option></select></div>
+            <div class="field"><label>ИНН</label><input name="inn" type="text" /></div>
+            <div class="field"><label>Кто принимает оплату от клиентов *</label><input name="payment_receiver" type="text" /></div>
+            <div class="field"><label>Есть ли сертификаты, дипломы, документы на оборудование</label><textarea name="docs_info"></textarea></div>
+            <div class="field"><label>Есть ли услуги, для которых важны лицензии или ограничения в рекламе</label><textarea name="restrictions"></textarea></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" data-section="2">
+        <div class="grid">
+          <div class="card half">
+            <h3 class="card-title">Услуги и приоритеты</h3>
+            <p class="card-sub">Что продвигать в первую очередь и на чём делать упор.</p>
+            <div class="field"><label>Все услуги *</label><textarea name="all_services"></textarea></div>
+            <div class="field"><label>Какие услуги хотите продвигать в первую очередь *</label><textarea name="priority_services"></textarea></div>
+            <div class="field"><label>Какие услуги самые прибыльные *</label><textarea name="most_profitable_services"></textarea></div>
+            <div class="field"><label>Какие услуги пока не нужно продвигать</label><textarea name="not_for_promo"></textarea></div>
+            <div class="field"><label>Есть ли акции, абонементы, пакеты, спецпредложения</label><textarea name="special_offers"></textarea></div>
+            <div class="field"><label>Приоритет №1, №2, №3 *</label><textarea name="priorities_top3"></textarea></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Целевая аудитория и география</h3>
+            <p class="card-sub">Поможет точнее настроить рекламу и офферы.</p>
+            <div class="field"><label>Кто ваш основной клиент *</label><textarea name="audience_main"></textarea></div>
+            <div class="field"><label>Какие основные боли и запросы у клиентов *</label><textarea name="audience_pains"></textarea></div>
+            <div class="field"><label>Почему клиенты выбирают именно вас *</label><textarea name="why_choose_you"></textarea></div>
+            <div class="field"><label>Какие районы / станции метро / локации нужно продвигать *</label><textarea name="promo_geo"></textarea></div>
+            <div class="field"><label>Какие районы лучше не запускать</label><textarea name="exclude_geo"></textarea></div>
+            <div class="field"><label>Работаете только в кабинете или есть выезд</label><select name="format_work"><option>Только в кабинете</option><option>Есть выезд</option><option>И так и так</option></select></div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Карточки приоритетных услуг</h3>
+            <p class="card-sub">Ниже можно заполнить до 3 ключевых услуг. Этого уже достаточно для старта сайта и рекламы.</p>
+
+            <div class="service-card">
+              <div class="service-head"><strong>Карточка услуги №1</strong></div>
+              <div class="grid">
+                <div class="card half"><div class="field"><label>Название услуги</label><input name="service1_name" type="text"></div><div class="field"><label>Стоимость / цена от</label><input name="service1_price" type="text"></div><div class="field"><label>Длительность процедуры</label><input name="service1_duration" type="text"></div><div class="field"><label>На каком аппарате / оборудовании выполняется</label><input name="service1_device" type="text"></div></div>
+                <div class="card half"><div class="field"><label>Что это за услуга и какой результат получает клиент</label><textarea name="service1_result"></textarea></div><div class="field"><label>Для кого подходит эта услуга</label><textarea name="service1_for_whom"></textarea></div><div class="field"><label>С какой проблемой или запросом обычно приходит клиент</label><textarea name="service1_pain"></textarea></div><div class="field"><label>В чём преимущества именно вашей услуги</label><textarea name="service1_advantages"></textarea></div></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="service-head"><strong>Карточка услуги №2</strong></div>
+              <div class="grid">
+                <div class="card half"><div class="field"><label>Название услуги</label><input name="service2_name" type="text"></div><div class="field"><label>Стоимость / цена от</label><input name="service2_price" type="text"></div><div class="field"><label>Длительность процедуры</label><input name="service2_duration" type="text"></div><div class="field"><label>На каком аппарате / оборудовании выполняется</label><input name="service2_device" type="text"></div></div>
+                <div class="card half"><div class="field"><label>Что это за услуга и какой результат получает клиент</label><textarea name="service2_result"></textarea></div><div class="field"><label>Для кого подходит эта услуга</label><textarea name="service2_for_whom"></textarea></div><div class="field"><label>С какой проблемой или запросом обычно приходит клиент</label><textarea name="service2_pain"></textarea></div><div class="field"><label>В чём преимущества именно вашей услуги</label><textarea name="service2_advantages"></textarea></div></div>
+              </div>
+            </div>
+
+            <div class="service-card">
+              <div class="service-head"><strong>Карточка услуги №3</strong></div>
+              <div class="grid">
+                <div class="card half"><div class="field"><label>Название услуги</label><input name="service3_name" type="text"></div><div class="field"><label>Стоимость / цена от</label><input name="service3_price" type="text"></div><div class="field"><label>Длительность процедуры</label><input name="service3_duration" type="text"></div><div class="field"><label>На каком аппарате / оборудовании выполняется</label><input name="service3_device" type="text"></div></div>
+                <div class="card half"><div class="field"><label>Что это за услуга и какой результат получает клиент</label><textarea name="service3_result"></textarea></div><div class="field"><label>Для кого подходит эта услуга</label><textarea name="service3_for_whom"></textarea></div><div class="field"><label>С какой проблемой или запросом обычно приходит клиент</label><textarea name="service3_pain"></textarea></div><div class="field"><label>В чём преимущества именно вашей услуги</label><textarea name="service3_advantages"></textarea></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Текущая реклама и бюджеты</h3>
+            <p class="card-sub">Это очень важно для понимания реальной ситуации и стартовой стратегии.</p>
+            <div class="checks" style="margin-bottom:14px">
+              <label class="check"><input type="checkbox" name="current_channels" value="Яндекс Директ"><span>Яндекс Директ</span></label>
+              <label class="check"><input type="checkbox" name="current_channels" value="Авито"><span>Авито</span></label>
+              <label class="check"><input type="checkbox" name="current_channels" value="ВК"><span>ВК</span></label>
+              <label class="check"><input type="checkbox" name="current_channels" value="Instagram"><span>Instagram</span></label>
+              <label class="check"><input type="checkbox" name="current_channels" value="Telegram"><span>Telegram</span></label>
+              <label class="check"><input type="checkbox" name="current_channels" value="2ГИС / карты"><span>2ГИС / карты</span></label>
+            </div>
+            <div class="grid">
+              <div class="card half"><div class="field"><label>Какие площадки сейчас дают заявки *</label><textarea name="working_channels"></textarea></div><div class="field"><label>Что не даёт результата</label><textarea name="bad_channels"></textarea></div><div class="field"><label>Есть ли действующие кабинеты и доступы</label><textarea name="accesses"></textarea></div></div>
+              <div class="card half"><div class="field"><label>Сколько в среднем тратите на рекламу в месяц</label><input name="budget_now" type="text"></div><div class="field"><label>Какой бюджет готовы выделять дальше *</label><input name="budget_next" type="text"></div><div class="field"><label>Какой бюджет комфортен на тестовый запуск *</label><input name="budget_test" type="text"></div><div class="field"><label>Готовы ли увеличивать бюджет, если реклама окупается</label><select name="budget_scale"><option>Да</option><option>Нет</option><option>Готовы обсуждать</option></select></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" data-section="3">
+        <div class="grid">
+          <div class="card half">
+            <h3 class="card-title">Сайт</h3>
+            <p class="card-sub">Что нужно по сайту и как он должен работать.</p>
+            <div class="field"><label>Есть ли сайт сейчас</label><select name="site_exist"><option>Да</option><option>Нет</option></select></div>
+            <div class="field"><label>Нужен новый сайт с нуля или доработка</label><select name="site_task"><option>Новый сайт</option><option>Доработка</option><option>Пока не уверены</option></select></div>
+            <div class="field"><label>Какие разделы обязательно должны быть на сайте *</label><textarea name="site_sections"></textarea></div>
+            <label>Что обязательно нужно разместить на сайте</label>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="site_blocks" value="Прайс"><span>Прайс</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Акции"><span>Акции</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Отзывы"><span>Отзывы</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Сертификаты"><span>Сертификаты</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Карта"><span>Карта</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Фото"><span>Фото</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Форма заявки"><span>Форма заявки</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Мессенджеры"><span>Мессенджеры</span></label>
+              <label class="check"><input type="checkbox" name="site_blocks" value="Онлайн-запись"><span>Онлайн-запись</span></label>
+            </div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Авито и обработка заявок</h3>
+            <p class="card-sub">Чтобы понять текущую воронку и загрузку.</p>
+            <div class="field"><label>Сколько сейчас аккаунтов Авито</label><input name="avito_accounts" type="text"></div>
+            <div class="field"><label>Какие услуги размещаются на каждом аккаунте</label><textarea name="avito_services"></textarea></div>
+            <div class="field"><label>Нужно ли переупаковать аккаунты полностью</label><select name="avito_repack"><option>Да</option><option>Нет</option><option>Частично</option></select></div>
+            <div class="field"><label>Кто отвечает на заявки *</label><input name="lead_manager" type="text"></div>
+            <div class="field"><label>Как быстро обычно отвечаете клиентам *</label><input name="lead_speed" type="text"></div>
+            <div class="field"><label>Через какие каналы чаще всего приходят обращения *</label><textarea name="lead_channels"></textarea></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Экономика и загрузка</h3>
+            <p class="card-sub">Чтобы реклама приносила не просто лиды, а деньги.</p>
+            <div class="field"><label>Средний чек по основным услугам *</label><textarea name="avg_check"></textarea></div>
+            <div class="field"><label>Какие услуги выгоднее всего продвигать *</label><textarea name="best_to_promote"></textarea></div>
+            <div class="field"><label>Сколько заявок / записей хотите получать в неделю или месяц *</label><input name="wanted_leads" type="text"></div>
+            <div class="field"><label>Сколько клиентов реально можете принимать *</label><input name="capacity" type="text"></div>
+            <div class="field"><label>Что будет считаться хорошим результатом рекламы *</label><textarea name="good_result"></textarea></div>
+          </div>
+
+          <div class="card half">
+            <h3 class="card-title">Конкуренты и ожидания</h3>
+            <p class="card-sub">Финальный блок, чтобы понять позиционирование и цели.</p>
+            <div class="field"><label>Чем вы лучше конкурентов *</label><textarea name="better_than_competitors"></textarea></div>
+            <div class="field"><label>Какая главная цель на ближайшие 3 месяца *</label><textarea name="goal_3_months"></textarea></div>
+            <div class="field"><label>Что для вас особенно важно в работе подрядчика *</label><textarea name="important_from_contractor"></textarea></div>
+            <div class="field"><label>Есть ли опасения по рекламе или прошлый негативный опыт</label><textarea name="fears"></textarea></div>
+            <div class="field"><label>Есть ли какие-нибудь вопросы, пожелания или замечания к форме?</label><textarea name="form_feedback"></textarea></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="nav">
+        <button class="btn secondary" type="button" id="prevBtn">Назад</button>
+        <button class="btn secondary" type="button" id="nextBtn">Дальше</button>
+      </div>
+
+      <div class="submitbar">
+        <div class="left">
+          <b>Отправка анкеты</b>
+          <div class="status" id="statusText">Можно переключаться между этапами и отправить анкету в конце.</div>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn secondary" type="button" id="saveDraftBtn">Сохранить черновик</button>
+          <button class="btn" type="submit" id="submitBtn">Отправить анкету</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const CONFIG = {
+      endpoint: "https://script.google.com/macros/s/AKfycbwJbKtpdLUgpi72vyyuBANp2o5XnqmtLiQXux9Zo9aJHBU6S3mTH_OQww7mOlRj3QL6/exec",
+      draftKey: "promo_brief_draft_v1"
+    };
+
+    const form = document.getElementById('briefForm');
+    const sections = [...document.querySelectorAll('.section')];
+    const stepBtns = [...document.querySelectorAll('.step-btn')];
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+    const statusText = document.getElementById('statusText');
+    let currentStep = 1;
+
+    function showStep(n) {
+      currentStep = Math.max(1, Math.min(3, n));
+      sections.forEach(s => s.classList.toggle('active', Number(s.dataset.section) === currentStep));
+      stepBtns.forEach(b => b.classList.toggle('active', Number(b.dataset.step) === currentStep));
+      prevBtn.disabled = currentStep === 1;
+      nextBtn.disabled = currentStep === 3;
+      nextBtn.classList.toggle('hidden', currentStep === 3);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    stepBtns.forEach(btn => btn.addEventListener('click', () => showStep(Number(btn.dataset.step))));
+    prevBtn.addEventListener('click', () => showStep(currentStep - 1));
+    nextBtn.addEventListener('click', () => showStep(currentStep + 1));
+
+    function collectFormData() {
+      const fd = new FormData(form);
+      const out = {};
+      for (const [key, value] of fd.entries()) {
+        if (Object.prototype.hasOwnProperty.call(out, key)) {
+          if (!Array.isArray(out[key])) out[key] = [out[key]];
+          out[key].push(value);
+        } else {
+          out[key] = value;
+        }
+      }
+      out.submitted_at = new Date().toISOString();
+      return out;
+    }
+
+    function fillForm(data) {
+      Object.entries(data || {}).forEach(([key, value]) => {
+        const nodes = form.querySelectorAll(`[name="${key}"]`);
+        if (!nodes.length) return;
+        const first = nodes[0];
+        if (first.type === 'checkbox') {
+          const values = Array.isArray(value) ? value : [value];
+          nodes.forEach(n => { n.checked = values.includes(n.value); });
+        } else if (first.type === 'radio') {
+          nodes.forEach(n => { n.checked = n.value === value; });
+        } else {
+          first.value = value ?? '';
+        }
+      });
+    }
+
+    function saveDraft() {
+      const data = collectFormData();
+      localStorage.setItem(CONFIG.draftKey, JSON.stringify(data));
+      statusText.textContent = 'Черновик сохранён на этом устройстве.';
+      statusText.className = 'status ok';
+    }
+
+    saveDraftBtn.addEventListener('click', saveDraft);
+
+    const saved = localStorage.getItem(CONFIG.draftKey);
+    if (saved) {
+      try {
+        fillForm(JSON.parse(saved));
+        statusText.textContent = 'Найден сохранённый черновик. Его можно продолжить заполнять.';
+        statusText.className = 'status ok';
+      } catch (e) {}
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      saveDraft();
+
+      if (!CONFIG.endpoint || CONFIG.endpoint === 'PUT_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        statusText.textContent = 'Форма готова, но адрес приёма данных ещё не подключён. Нужно вставить URL Google Apps Script в CONFIG.endpoint.';
+        statusText.className = 'status';
+        alert('Нужно подключить URL Google Apps Script в CONFIG.endpoint, чтобы отправка работала онлайн.');
+        return;
+      }
+
+      try {
+        statusText.textContent = 'Отправляем анкету...';
+        statusText.className = 'status';
+
+        const formData = new FormData(form);
+        formData.append('submitted_at', new Date().toISOString());
+
+        const response = await fetch(CONFIG.endpoint, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Ошибка сети');
+
+        statusText.textContent = 'Анкета успешно отправлена.';
+        statusText.className = 'status ok';
+        localStorage.removeItem(CONFIG.draftKey);
+        alert('Анкета успешно отправлена.');
+      } catch (err) {
+        statusText.textContent = 'Не удалось отправить анкету. Проверь подключение или адрес приёма данных.';
+        statusText.className = 'status';
+        alert('Не удалось отправить анкету.');
+      }
+    });
+
+    showStep(1);
+  </script>
+</body>
+</html>
