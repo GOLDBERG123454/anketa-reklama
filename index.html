@@ -436,7 +436,7 @@
 
       saveDraft();
 
-      if (!CONFIG.endpoint || CONFIG.endpoint === 'PUT_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      if (!CONFIG.endpoint || CONFIG.endpoint === 'https://script.google.com/macros/s/AKfycbwJbKtpdLUgpi72vyyuBANp2o5XnqmtLiQXux9Zo9aJHBU6S3mTH_OQww7mOlRj3QL6/exec') {
         statusText.textContent = 'Форма готова, но адрес приёма данных ещё не подключён. Нужно вставить URL Google Apps Script в CONFIG.endpoint.';
         statusText.className = 'status';
         alert('Нужно подключить URL Google Apps Script в CONFIG.endpoint, чтобы отправка работала онлайн.');
